@@ -1,17 +1,13 @@
 ﻿#include <iostream>
 #include <cmath>
 #include <iomanip>
-#include <locale>
+#include <clocale>
 #include <chrono>
 
 using namespace std;
 
-double func(double x) {
-    return acos(x) - sqrt(1 - 0.3 * x * x * x * x);
-}
-
 int main() {
-    setlocale(LC_ALL, "RU");
+    setlocale(LC_ALL, "ru-RU");
 
     double a = 0.0, b = 1.0;
     double eps = 1e-6;
@@ -21,11 +17,12 @@ int main() {
 
     while (abs(b - a) > eps) {
         x = (a + b) / 2.0;
-        double f = func(x);
+
+        double f = acos(x) - sqrt(1 - 0.3 * x * x * x);
 
         if (f == 0.0) break;
 
-        if (func(a) * f < 0)
+        if ((acos(a) - sqrt(1 - 0.3 * a * a * a)) * f < 0)
             b = x;
         else
             a = x;

@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <clocale>
 #include <string>
 using namespace std;
 
