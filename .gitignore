@@ -10,6 +10,7 @@ CMakeCache.txt
 cmake_install.cmake
 Makefile
 compile_commands.json
+CMakeSettings.json
 
 # ========================
 # Visual Studio
@@ -29,6 +30,11 @@ Debug/
 Release/
 x64/
 x86/
+
+# Доп. мусор VS
+*.ilk
+*.tlog
+*.lastbuildstate
 
 # ========================
 # Компиляция
