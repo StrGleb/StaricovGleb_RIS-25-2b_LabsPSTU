@@ -1,33 +1,48 @@
 #include "Person.h"
 
-Person::Person(void) { name = ""; age = 0; }
+// конструктор без параметров
+Person::Person(void) { 
+    name = ""; // инициализация имени
+    age = 0;   // инициализация возраста
+}
+
+// деструктор
 Person::~Person(void) {}
-Person::Person(string N, int A) { name = N; age = A; }
-Person::Person(const Person& p) { name = p.name; age = p.age; }
 
+// конструктор с параметрами
+Person::Person(string N, int A) { 
+    name = N; // установка имени
+    age = A;  // установка возраста
+}
+
+// конструктор копирования
+Person::Person(const Person& p) { 
+    name = p.name; // копирование имени
+    age = p.age;   // копирование возраста
+}
+
+// операция присваивания
 Person& Person::operator=(const Person& p) {
-    if (&p == this) return *this;
-    name = p.name;
-    age = p.age;
-    return *this;
+    if (&p == this) return *this; // проверка самоприсваивания
+
+    name = p.name; // копирование имени
+    age = p.age;   // копирование возраста
+
+    return *this; // возврат текущего объекта
 }
 
-void Person::Show() {
-    cout << "\nNAME: " << name << "\nAGE: " << age << endl;
-}
-
+// ввод данных
 void Person::Input() {
-    cout << "\nName: "; cin >> name;
-    cout << "\nAge: "; cin >> age;
+    cout << "\nName: "; cin >> name; // ввод имени
+    cout << "\nAge: "; cin >> age;   // ввод возраста
 }
 
+// обработка события (переопределяется в наследниках при необходимости)
 void Person::HandleEvent(const TEvent& e) {
-    if (e.what == evMessage) {
-        switch (e.command) {
-        case cmGet:
-            // Здесь можно вывести имя объекта при запросе 'z'
-            cout << "Checking person: " << name << endl;
-            break;
-        }
-    }
+}
+
+// вывод информации
+void Person::Show() {
+    cout << "Name: " << name << endl;
+    cout << "Age: " << age << endl;
 }

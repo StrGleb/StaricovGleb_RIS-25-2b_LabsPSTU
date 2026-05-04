@@ -1,55 +1,31 @@
 #pragma once
-
 #include <iostream>
+#include "iterator.h"
+
 using namespace std;
-
-class Iterator {
-    friend class List;
-
-private:
-    int* elem;
-
-public:
-    Iterator() { elem = 0; }
-    Iterator(const Iterator& it) { elem = it.elem; }
-
-    bool operator==(const Iterator& it) { return elem == it.elem; }
-    bool operator!=(const Iterator& it) { return elem != it.elem; }
-
-    void operator++() { ++elem; }
-    Iterator operator++(int) {
-        Iterator temp(*this);
-        ++elem;
-        return temp;
-    }
-
-    void operator--() { --elem; }
-
-    int& operator*() const { return *elem; }
-};
 
 class List {
 private:
-    int size;
-    int* data;
-    Iterator beg;
-    Iterator end;
+    int* data;      // динамический массив элементов
+    int size;       // размер списка
+    Iterator beg;   // итератор на начало
+    Iterator end;   // итератор на конец
 
 public:
-    List(int s, int k = 0);
-    List(const List& l);
-    ~List();
+    List(int s = 0, int k = 0); // конструктор с параметрами
+    List(const List&); // конструктор копирования
+    ~List(); // деструктор
 
-    List& operator=(const List& l);
+    List& operator=(const List&); // операция присваивания
 
-    int& operator[](int index);
+    int& operator[](int); // доступ по индексу
 
-    List operator+(const List& l);
-    List operator+(const int k);
+    List operator+(const List&); // сложение двух списков
+    List operator+(int); // прибавление числа ко всем элементам
 
-    Iterator first() { return beg; }
-    Iterator last() { return end; }
+    Iterator first(); // вернуть итератор на начало
+    Iterator last();  // вернуть итератор на конец
 
-    friend ostream& operator<<(ostream& out, const List& l);
-    friend istream& operator>>(istream& in, List& l);
+    friend ostream& operator<<(ostream&, const List&); // вывод списка
+    friend istream& operator>>(istream&, List&); // ввод списка
 };

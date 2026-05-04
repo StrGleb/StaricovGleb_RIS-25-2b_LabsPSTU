@@ -5,25 +5,25 @@ using namespace std;
 
 class Pair {
 private:
-	int first;
-	double second;
+	int first;      // первое число пары
+	double second;  // второе число пары
 
 public:
-	Pair() { first = 0; second = 0.0; }
-	Pair(int f, double s) { first = f; second = s; }
-	Pair(const Pair& p) { first = p.first; second = p.second; }
-	~Pair() {}
+	Pair() { first = 0; second = 0.0; } // конструктор без параметров
+	Pair(int f, double s) { first = f; second = s; } // конструктор с параметрами
+	Pair(const Pair& p) { first = p.first; second = p.second; } // конструктор копирования
+	~Pair() {} // деструктор
 
-	int getFirst() { return first; }
-	double getSecond() { return second; }
+	int getFirst() { return first; } // получить первое значение
+	double getSecond() { return second; } // получить второе значение
 
-	void setFirst(int f);
-	void setSecond(double s);
+	void setFirst(int f); // установить первое значение
+	void setSecond(double s); // установить второе значение
 
-	Pair& operator = (const Pair& p);
+	Pair& operator = (const Pair& p); // операция присваивания
+	Pair operator + (const Pair& p);  // сложение двух пар
+	Pair operator + (int k);          // прибавление числа к паре
 
-	Pair operator + (const Pair& p);
-
-	friend istream& operator >> (istream& in, Pair& p);
-	friend ostream& operator << (ostream& out, const Pair& p);
+	friend istream& operator >> (istream& in, Pair& p); // ввод пары
+	friend ostream& operator << (ostream& out, const Pair& p); // вывод пары
 };

@@ -2,27 +2,28 @@
 
 #include "Person.h"
 
+// Производный класс
 class Employee : public Person {
 protected:
-    string post;
-    double salary;
+    string post;   // должность
+    double salary; // оклад
 
 public:
-    Employee();
-    Employee(string n, int a, string p, double s);
-    Employee(const Employee&);
-    ~Employee();
+    Employee(); // конструктор без параметров
+    Employee(string n, int a, string p, double s); // конструктор с параметрами
+    Employee(const Employee&); // конструктор копирования
+    ~Employee(); // деструктор
 
-    string getPost() { return post; }
-    double getSalary() { return salary; }
+    string getPost() { return post; }   // селектор должности
+    double getSalary() { return salary; } // селектор зарплаты
 
-    void setPost(string p);
-    void setSalary(double s);
+    void setPost(string p);   // модификатор должности
+    void setSalary(double s); // модификатор зарплаты
 
-    double getFullSalary(double percent);
+    double getFullSalary(double percent); // расчет зарплаты с премией
 
-    Employee& operator=(const Employee&);
+    Employee& operator=(const Employee&); // операция присваивания
 
-    friend istream& operator>>(istream&, Employee&);
-    friend ostream& operator<<(ostream&, const Employee&);
+    friend istream& operator>>(istream&, Employee&);       // ввод
+    friend ostream& operator<<(ostream&, const Employee&); // вывод
 };

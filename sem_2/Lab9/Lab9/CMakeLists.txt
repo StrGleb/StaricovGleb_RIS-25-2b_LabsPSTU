@@ -6,5 +6,5 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(Lab9
     main.cpp
-    List.cpp
-)
+    
+ "Vector.h" "Vector.cpp" "List.h" "Error.h" "List.cpp")

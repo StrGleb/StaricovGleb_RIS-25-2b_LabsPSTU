@@ -26,9 +26,12 @@ int main() {
     cout << "\nd = a + 10: " << d;
 
     Iterator i = a.first();
-
     i++;
     cout << "\nafter i++: " << *i;
+
+    Iterator j = a.last();
+    --j;
+    cout << "\nexplicit --: " << *j;
 
     cout << "\nreverse: ";
     for (i = a.last(); i != a.first();) {

@@ -1,118 +1,98 @@
 #pragma once
-
 #include <iostream>
+#include <cstdlib>
+
 using namespace std;
 
 template <class T>
 class List {
 private:
-	int size;
-	T* data;
+    T* data;   // динамический массив элементов
+    int size;  // размер списка
 
 public:
-	List(int s, T k);
-	List(const List<T>& l);
-	~List();
+    // конструктор
+    List(int s = 0, T k = T()) {
+        size = s; // установка размера
+        data = new T[size]; // выделение памяти
 
-	List& operator = (const List<T>& l);
+        for (int i = 0; i < size; i++)
+            data[i] = k; // инициализация элементов
+    }
 
-	T& operator [] (int index);
+    // конструктор копирования
+    List(const List<T>& l) {
+        size = l.size; // копирование размера
+        data = new T[size]; // выделение памяти
 
-	List operator + (const List<T>& l);
-	List operator + (const T k);
+        for (int i = 0; i < size; i++)
+            data[i] = l.data[i]; // копирование элементов
+    }
 
-	friend ostream& operator << <> (ostream& out, const List<T>& l);
-	friend istream& operator >> <> (istream& in, List<T>& l);
+    // деструктор
+    ~List() {
+        delete[] data; // освобождение памяти
+    }
+
+    // операция присваивания
+    List<T>& operator=(const List<T>& l) {
+        if (this == &l) return *this; // проверка самоприсваивания
+
+        if (data != 0) delete[] data; // очистка памяти
+
+        size = l.size; // копирование размера
+        data = new T[size]; // выделение памяти
+
+        for (int i = 0; i < size; i++)
+            data[i] = l.data[i]; // копирование элементов
+
+        return *this; // возврат текущего объекта
+    }
+
+    // доступ по индексу
+    T& operator[](int index) {
+        if (index >= 0 && index < size)
+            return data[index]; // возврат элемента
+
+        cout << "Error index" << endl;
+        exit(1);
+    }
+
+    // сложение списков
+    List<T> operator+(const List<T>& l) {
+        int minSize = (size < l.size) ? size : l.size; // минимальный размер
+
+        List<T> temp(minSize, T()); // временный список
+
+        for (int i = 0; i < minSize; i++)
+            temp.data[i] = data[i] + l.data[i]; // поэлементное сложение
+
+        return temp; // возврат результата
+    }
+
+    // прибавление значения ко всем элементам
+    List<T> operator+(T k) {
+        List<T> temp(size, T()); // временный список
+
+        for (int i = 0; i < size; i++)
+            temp.data[i] = data[i] + k; // прибавление
+
+        return temp; // возврат результата
+    }
+
+    // вывод списка
+    friend ostream& operator<<(ostream& out, const List<T>& l) {
+        for (int i = 0; i < l.size; i++)
+            out << l.data[i] << " "; // вывод элементов
+
+        return out;
+    }
+
+    // ввод списка
+    friend istream& operator>>(istream& in, List<T>& l) {
+        for (int i = 0; i < l.size; i++)
+            in >> l.data[i]; // ввод элементов
+
+        return in;
+    }
 };
-
-template <class T>
-List<T>::List(int s, T k) {
-	size = s;
-	data = new T[size];
-
-	for (int i = 0; i < size; i++)
-		data[i] = k;
-}
-
-template <class T>
-List<T>::List(const List<T>& l) {
-	size = l.size;
-	data = new T[size];
-
-	for (int i = 0; i < size; i++)
-		data[i] = l.data[i];
-}
-
-template <class T>
-List<T>::~List() {
-	delete[] data;
-	data = 0;
-}
-
-template <class T>
-List<T>& List<T>::operator = (const List<T>& l) {
-	if (this == &l) return *this;
-
-	size = l.size;
-
-	if (data != 0) delete[] data;
-
-	data = new T[size];
-
-	for (int i = 0; i < size; i++)
-		data[i] = l.data[i];
-
-	return *this;
-}
-
-template <class T>
-T& List<T>::operator [] (int index) {
-	if (index >= 0 && index < size)
-		return data[index];
-
-	cout << "error index";
-	return data[0];
-}
-
-template <class T>
-List<T> List<T>::operator + (const List<T>& l) {
-	int minSize;
-
-	if (size < l.size)
-		minSize = size;
-	else
-		minSize = l.size;
-
-	List<T> temp(minSize, data[0]);
-
-	for (int i = 0; i < minSize; i++)
-		temp.data[i] = data[i] + l.data[i];
-
-	return temp;
-}
-
-template <class T>
-List<T> List<T>::operator + (const T k) {
-	List<T> temp(size, data[0]);
-
-	for (int i = 0; i < size; i++)
-		temp.data[i] = data[i] + k;
-
-	return temp;
-}
-
-template <class T>
-ostream& operator << (ostream& out, const List<T>& l) {
-	for (int i = 0; i < l.size; i++)
-		out << l.data[i] << " ";
-
-	return out;
-}
-
-template <class T>
-istream& operator >> (istream& in, List<T>& l) {
-	for (int i = 0; i < l.size; i++)
-		in >> l.data[i];
-
-	return in;
-}

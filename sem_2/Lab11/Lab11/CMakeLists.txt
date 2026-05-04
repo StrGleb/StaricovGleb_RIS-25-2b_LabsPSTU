@@ -6,9 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(Lab11
     main.cpp
-    task1.cpp
-    task2.cpp
-    task3.cpp
-    task4.cpp
-    task5.cpp
-)
+    
+    
+    
+    
+    
+   "List.h" "Pair.h")

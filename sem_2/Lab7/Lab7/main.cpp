@@ -1,51 +1,44 @@
-#include "List.h"
-#include "Pair.h"
+#include "list.h"
+#include "pair.h"
 #include <iostream>
+
 using namespace std;
 
 int main() {
-	List<int> a(5, 0);
-	List<int> b(5, 0);
+    List<int> a(5); // список целых чисел
+    List<int> b(5); // список целых чисел
 
-	cout << "enter first int list: ";
-	cin >> a;
+    cout << "enter a: ";
+    cin >> a; // ввод списка a
 
-	cout << "enter second int list: ";
-	cin >> b;
+    cout << "enter b: ";
+    cin >> b; // ввод списка b
 
-	cout << "\na: " << a;
-	cout << "\nb: " << b;
+    cout << "\na: " << a; // вывод списка a
+    cout << "\nb: " << b; // вывод списка b
 
-	a[2] = 100;
-	cout << "\na after a[2] = 100: " << a;
+    a[2] = 100; // изменение элемента по индексу
+    cout << "\na after change: " << a;
 
-	List<int> c = a + b;
-	cout << "\nc = a + b: " << c;
+    List<int> c = a + b; // сложение списков
+    cout << "\nc = a + b: " << c;
 
-	List<int> d = a + 10;
-	cout << "\nd = a + 10: " << d;
+    List<int> d = a + 10; // прибавление числа ко всем элементам
+    cout << "\nd = a + 10: " << d;
 
-	Pair p(1, 1.5);
+    Pair p1, p2; // объекты класса Pair
 
-	List<Pair> x(3, p);
-	List<Pair> y(3, p);
+    cout << "\nenter pair 1: ";
+    cin >> p1; // ввод первой пары
 
-	cout << "\n\nenter first pair list:" << endl;
-	cin >> x;
+    cout << "enter pair 2: ";
+    cin >> p2; // ввод второй пары
 
-	cout << "enter second pair list:" << endl;
-	cin >> y;
+    Pair p3 = p1 + p2; // сложение пар
+    cout << "p1 + p2 = " << p3;
 
-	cout << "\nx: " << x;
-	cout << "\ny: " << y;
+    Pair p4 = p1 + 10; // прибавление числа к паре
+    cout << "\np1 + 10 = " << p4;
 
-	List<Pair> z = x + y;
-	cout << "\nz = x + y: " << z;
-
-	List<Pair> q = x + p;
-	cout << "\nq = x + p: " << q;
-
-	cout << endl;
-
-	return 0;
+    return 0; // конец программы
 }

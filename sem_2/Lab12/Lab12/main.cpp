@@ -1,39 +1,89 @@
 #include <iostream>
 #include "Task.h"
 #include "Container.h"
-#include "Pair.h"
 
 using namespace std;
 
 int main() {
-    int task;
-    cout << "Select task (1, 2, 3) or 0 to exit: ";
-    cin >> task;
 
-    if (task == 1) {
-        int n; cout << "Enter count: "; cin >> n;
-        TSet s = make_set(n);
-        cout << "Range to remove (min max): ";
-        double v1, v2; cin >> v1 >> v2;
-        modify_set(s, v1, v2);
-        print_set(s);
-    }
-    else if (task == 2) {
-        int n; cout << "Enter count: "; cin >> n;
-        TMap m = make_map(n);
-        cout << "Key range to remove (k1 k2): ";
-        int k1, k2; cin >> k1 >> k2;
-        process_map(m, k1, k2);
-        print_map(m);
-    }
-    else if (task == 3) {
-        int n; cout << "Enter count: "; cin >> n;
-        Container<Pair> con(n);
-        con.AddMax();
-        cout << "Key range to remove (k1 k2): ";
-        int k1, k2; cin >> k1 >> k2;
-        con.RemoveRange(k1, k2);
-        con.AddAverage();
-        con.Print();
-    }
+    // ===== ЗАДАЧА 1 =====
+
+    cout << "\n===== TASK 1 =====\n";
+
+    int n;
+    cout << "Enter number of elements: ";
+    cin >> n;
+
+    // создание и заполнение контейнера
+    TSet s = make_set(n);
+
+    // вывод контейнера
+    cout << "Original set:\n";
+    print_set(s);
+
+    double a, b;
+    cout << "Enter range [a b]: ";
+    cin >> a >> b;
+
+    // обработка контейнера
+    modify_set(s, a, b);
+
+    // вывод результата
+    cout << "Result:\n";
+    print_set(s);
+
+
+    // ===== ЗАДАЧА 2 =====
+
+    cout << "\n===== TASK 2 =====\n";
+
+    cout << "Enter number of elements: ";
+    cin >> n;
+
+    // создание и заполнение контейнера
+    TMap m = make_map(n);
+
+    // вывод контейнера
+    cout << "Original map:\n";
+    print_map(m);
+
+    int k1, k2;
+    cout << "Enter key range [k1 k2]: ";
+    cin >> k1 >> k2;
+
+    // обработка контейнера
+    process_map(m, k1, k2);
+
+    // вывод результата
+    cout << "Result:\n";
+    print_map(m);
+
+
+    // ===== ЗАДАЧА 3 =====
+
+    cout << "\n===== TASK 3 =====\n";
+
+    cout << "Enter number of elements: ";
+    cin >> n;
+
+    // создание контейнера
+    Container<Pair> c(n);
+
+    // вывод контейнера
+    cout << "Original container:\n";
+    c.Print();
+
+    cout << "Enter key range [k1 k2]: ";
+    cin >> k1 >> k2;
+
+    // обработка контейнера
+    c.RemoveRange(k1, k2);
+    c.AddMax();
+    c.AddAverage();
+
+    // вывод результата
+    cout << "Result:\n";
+    c.Print();
+
+    return 0;
 }

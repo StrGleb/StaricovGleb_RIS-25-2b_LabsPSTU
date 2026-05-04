@@ -4,19 +4,26 @@
 #include <iostream>
 using namespace std;
 
+// абстрактный класс Person (наследник Object)
 class Person : public Object {
 public:
-    Person(void);
-    virtual ~Person(void);
-    void Show();
-    void Input();
-    Person(string, int);
-    Person(const Person&);
+    Person(void); // конструктор без параметров
+    virtual ~Person(void); // деструктор
 
-    int Get_age() { return age; }
-    Person& operator=(const Person&);
-    void HandleEvent(const TEvent& e);
+    virtual void Show(); // чисто виртуальная функция (вывод информации)
+
+    void Input(); // ввод данных
+
+    Person(string, int); // конструктор с параметрами
+    Person(const Person&); // конструктор копирования
+
+    int Get_age() { return age; } // получить возраст
+
+    Person& operator=(const Person&); // операция присваивания
+
+    void HandleEvent(const TEvent& e); // обработка события
+
 protected:
-    string name;
-    int age;
+    string name; // имя
+    int age;     // возраст
 };

@@ -1,5 +1,6 @@
 #include "pair.h"
 
+// перегрузка операции присваивания
 Pair& Pair::operator=(const Pair& p) {
     if (this == &p) return *this;
 
@@ -8,6 +9,7 @@ Pair& Pair::operator=(const Pair& p) {
     return *this;
 }
 
+// перегрузка операторов сравнения
 bool Pair::operator<(const Pair& p) {
     if (first < p.first) return true;
     if (first == p.first && second < p.second) return true;
@@ -20,17 +22,20 @@ bool Pair::operator>(const Pair& p) {
     return false;
 }
 
+// перегрузка префиксной операции
 Pair& Pair::operator--() {
     first--;
     return *this;
 }
 
+// перегрузка постфиксной операции
 Pair Pair::operator--(int) {
     Pair temp(*this);
     second--;
     return temp;
 }
 
+// перегрузка глобальной функции-операции ввода
 istream& operator>>(istream& in, Pair& p) {
     cout << "Vvedite first: ";
     in >> p.first;
@@ -39,6 +44,7 @@ istream& operator>>(istream& in, Pair& p) {
     return in;
 }
 
+// перегрузка глобальной функции-операции вывода
 ostream& operator<<(ostream& out, const Pair& p) {
     out << p.first << ":" << p.second;
     return out;

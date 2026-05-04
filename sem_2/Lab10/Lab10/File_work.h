@@ -1,83 +1,150 @@
 #pragma once
 #include "Pair.h"
-#include <iostream>
 #include <fstream>
-
+#include <cstdio>
 using namespace std;
 
-inline int make_file(const char* f_name) {
+// создание файла
+int make_file(const char* f_name) {
     fstream stream(f_name, ios::out | ios::trunc);
     if (!stream) return -1;
+
     int n;
     Pair p;
-    cout << "Count elements? "; cin >> n;
+
+    cout << "Count of pairs: ";
+    cin >> n;
+
     for (int i = 0; i < n; i++) {
         cin >> p;
-        stream << p;
+        stream << p << endl;
     }
+
     stream.close();
     return n;
 }
 
-inline int print_file(const char* f_name) {
+// вывод файла
+int print_file(const char* f_name) {
     fstream stream(f_name, ios::in);
     if (!stream) return -1;
-    Pair p; int i = 0;
+
+    Pair p;
+    int count = 0;
+
     while (stream >> p) {
         cout << p << endl;
-        i++;
+        count++;
     }
+
     stream.close();
-    return i;
+    return count;
 }
 
-inline int del_equal(const char* f_name, Pair val) {
-    fstream temp("temp", ios::out);
+// удаление записей, равных значению
+int del_equal(const char* f_name, Pair val) {
     fstream stream(f_name, ios::in);
+    fstream temp("temp", ios::out);
+
     if (!stream) return -1;
+
     Pair p;
+    int count = 0;
+
     while (stream >> p) {
-        if (!(p == val)) temp << p;
+        if (!(p == val))
+            temp << p << endl;
+        else
+            count++; // считаем удалённые элементы
     }
-    stream.close(); temp.close();
+
+    stream.close();
+    temp.close();
+
     remove(f_name);
     rename("temp", f_name);
+
+    return count;
+}
+
+// изменение записей (уменьшение на L) С ПОДТВЕРЖДЕНИЕМ
+int change_file(const char* f_name, Pair val, double L) {
+    fstream stream(f_name, ios::in);
+    fstream temp("temp", ios::out);
+
+    if (!stream) return -1;
+
+    Pair p;
+    int count = 0;
+    char x;
+
+    while (stream >> p) {
+        if (p == val) {
+            cout << p << " - is changing... Continue[y/n]?\n";
+            cin >> x;
+
+            if (x == 'y' || x == 'Y') {
+                temp << (p - L) << endl;
+                count++;
+            }
+            else {
+                temp << p << endl;
+            }
+        }
+        else {
+            temp << p << endl;
+        }
+    }
+
+    stream.close();
+    temp.close();
+
+    remove(f_name);
+    rename("temp", f_name);
+
+    return count;
+}
+
+// добавление в конец (как в методичке)
+int add_end(const char* f_name, Pair p) {
+    fstream stream(f_name, ios::app);
+    if (!stream) return -1;
+
+    stream << p << endl;
+    stream.close();
     return 1;
 }
 
-inline int change_file(const char* f_name, Pair val, double L) {
-    fstream temp("temp", ios::out);
+// добавление K записей после заданного значения
+int add_after(const char* f_name, Pair target, int k) {
     fstream stream(f_name, ios::in);
-    if (!stream) return -1;
-    Pair p;
-    while (stream >> p) {
-        if (p == val) temp << (p - L);
-        else temp << p;
-    }
-    stream.close(); temp.close();
-    remove(f_name);
-    rename("temp", f_name);
-    return 1;
-}
+    fstream temp("temp", ios::out);
 
-inline int add_after(const char* f_name, Pair target, int k) {
-    fstream temp("temp", ios::out);
-    fstream stream(f_name, ios::in);
     if (!stream) return -1;
+
     Pair p;
+    int found = 0;
+
     while (stream >> p) {
-        temp << p;
+        temp << p << endl;
+
         if (p == target) {
+            found = 1;
+
             for (int i = 0; i < k; i++) {
                 Pair new_p;
-                cout << "Enter new pair " << i + 1 << ":" << endl;
+                cout << "New pair:\n";
                 cin >> new_p;
-                temp << new_p;
+                temp << new_p << endl;
             }
         }
     }
-    stream.close(); temp.close();
+
+    stream.close();
+    temp.close();
+
     remove(f_name);
     rename("temp", f_name);
-    return 1;
+
+    return found; // если 0 -> не нашли элемент
 }

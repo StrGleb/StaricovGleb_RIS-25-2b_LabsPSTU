@@ -10,5 +10,5 @@ add_executable(Lab8
     Dialog.cpp
     Object.cpp
     Person.cpp
-    Tree.cpp
+    "List.cpp"
 )

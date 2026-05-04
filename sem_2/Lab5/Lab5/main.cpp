@@ -7,24 +7,24 @@
 using namespace std;
 
 int main() {
-    Vector v(5);
+    Vector v(5); // создание вектора
 
     Person a;
-    cin >> a;
+    cin >> a; // ввод объекта Person
     cout << endl;
 
     Employee b;
-    cin >> b;
+    cin >> b; // ввод объекта Employee
 
-    Object* p = &a;
-    v.Add(p);
+    Object* p = &a; // указатель на базовый класс
+    v.Add(p);       // добавление Person
 
-    p = &b;
-    v.Add(p);
+    p = &b;         // указатель на Employee
+    v.Add(p);       // добавление Employee
 
-    cout << v;
+    cout << v;      // полиморфный вывод
 
-    cout << "\nSalary with bonus: " << b.getFullSalary(20) << endl;
+    cout << "\nSalary with bonus: " << b.getFullSalary(20) << endl; // расчет зарплаты
 
     return 0;
 }

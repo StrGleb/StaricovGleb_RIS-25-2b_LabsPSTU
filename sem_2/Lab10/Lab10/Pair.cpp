@@ -1,10 +1,12 @@
 #include "Pair.h"
 
+// конструкторы
 Pair::Pair() { first = 0; second = 0; }
 Pair::Pair(int f, double s) { first = f; second = s; }
 Pair::Pair(const Pair& p) { first = p.first; second = p.second; }
 Pair::~Pair() {}
 
+// сравнение
 bool Pair::operator<(const Pair& p) const {
     if (first < p.first) return true;
     if (first == p.first && second < p.second) return true;
@@ -19,39 +21,44 @@ bool Pair::operator==(const Pair& p) const {
     return (first == p.first && second == p.second);
 }
 
+// префиксный --
 Pair& Pair::operator--() {
-    --first; // Уменьшение первого числа (int)
+    --first;
     return *this;
 }
 
+// постфиксный --
 Pair Pair::operator--(int) {
     Pair temp(*this);
-    second--; // Уменьшение второго числа (double)
+    second--;
     return temp;
 }
 
+// уменьшение на L
 Pair Pair::operator-(double L) {
     return Pair(first, second - L);
 }
 
+// вывод 
 ostream& operator<<(ostream& out, const Pair& p) {
     out << p.first << ":" << p.second;
     return out;
 }
 
+// ввод
 istream& operator>>(istream& in, Pair& p) {
-    cout << "first (int)? "; in >> p.first;
-    cout << "second (double)? "; in >> p.second;
+
+    if (&in == &cin) {
+        cout << "Enter first (int): ";
+        in >> p.first;
+
+        cout << "Enter second (double): ";
+        in >> p.second;
+    }
+    else {
+        char ch;
+        in >> p.first >> ch >> p.second; // читаем "1:1"
+    }
+
     return in;
-}
-
-fstream& operator>>(fstream& fin, Pair& p) {
-    fin >> p.first;
-    fin >> p.second;
-    return fin;
-}
-
-fstream& operator<<(fstream& fout, const Pair& p) {
-    fout << p.first << "\n" << p.second << "\n";
-    return fout;
 }

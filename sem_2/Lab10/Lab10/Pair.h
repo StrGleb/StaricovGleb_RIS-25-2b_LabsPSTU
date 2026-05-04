@@ -1,36 +1,32 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-#include <string>
-
 using namespace std;
 
+// Класс Pair (пара чисел)
 class Pair {
-    int first;
-    double second;
-public:
-    Pair();
-    Pair(int, double);
-    Pair(const Pair&);
-    ~Pair();
+    int first;      // первое число
+    double second;  // второе число
 
-    // Операции сравнения по заданию
+public:
+    Pair();                    // конструктор без параметров
+    Pair(int, double);         // конструктор с параметрами
+    Pair(const Pair&);         // конструктор копирования
+    ~Pair();                   // деструктор
+
+    // операции сравнения (по методичке)
     bool operator<(const Pair&) const;
     bool operator>(const Pair&) const;
     bool operator==(const Pair&) const;
 
-    // Операция -- по заданию
-    Pair& operator--();    // Префиксная (уменьшает первое число)
-    Pair operator--(int); // Постфиксная (уменьшает второе число)
+    // операция -- (по заданию)
+    Pair& operator--();     // префиксная (уменьшает первое число)
+    Pair operator--(int);   // постфиксная (уменьшает второе число)
 
-    // Вспомогательная операция для уменьшения на L
+    // операция уменьшения на число L
     Pair operator-(double L);
 
-    // Ввод/вывод для стандартных потоков
+    // ввод/вывод
     friend ostream& operator<<(ostream& out, const Pair& p);
     friend istream& operator>>(istream& in, Pair& p);
-
-    // Ввод/вывод для файловых потоков
-    friend fstream& operator>>(fstream& fin, Pair& p);
-    friend fstream& operator<<(fstream& fout, const Pair& p);
 };

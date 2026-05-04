@@ -4,37 +4,39 @@
 
 using namespace std;
 
+// функция с базовым классом (принцип подстановки)
 void f1(Person& p) {
-    p.setName("Ivan");
-    cout << p;
+    p.setName("Ivan"); // изменение имени
+    cout << p;         // вывод
 }
 
+// возврат базового класса (фактически возвращается Employee)
 Person f2() {
-    Employee e("Petr", 25, "manager", 50000);
-    return e;
+    Employee e("Petr", 25, "manager", 50000); // создание объекта
+    return e; // возврат как Person
 }
 
 int main() {
-    Person a;
-    Person b("Alex", 20);
+    Person a;                   // базовый объект
+    Person b("Alex", 20);       // инициализация
 
-    cin >> a;
-    cout << a;
+    cin >> a;                   // ввод
+    cout << a;                  // вывод
 
     cout << b;
 
-    a = b;
+    a = b;                      // присваивание
     cout << a << endl;
 
-    Employee c;
-    cin >> c;
-    cout << c;
+    Employee c;                 // объект производного класса
+    cin >> c;                   // ввод
+    cout << c;                  // вывод
 
-    cout << "\nSalary with bonus: " << c.getFullSalary(20) << endl;
+    cout << "\nSalary with bonus: " << c.getFullSalary(20) << endl; // расчет зарплаты
 
-    f1(c);
+    f1(c);                      // передача производного класса как базового
 
-    a = f2();
+    a = f2();                   // получение объекта производного как базового
     cout << a;
 
     return 0;

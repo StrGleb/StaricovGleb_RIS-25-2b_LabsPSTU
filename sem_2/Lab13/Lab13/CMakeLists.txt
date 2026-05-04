@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(Lab13
     main.cpp
-    task1.cpp
-    task2.cpp
-    task3.cpp
-)
+    
+    
+    
+ "Tasks.cpp")

@@ -1,44 +1,40 @@
 #pragma once
 #include <iostream>
+using namespace std;
 
+// пользовательский тип Pair
 class Pair {
 public:
     int first;
     double second;
 
-    Pair() : first(0), second(0.0) {}
-    Pair(int f, double s) : first(f), second(s) {}
-
-    bool operator>(const Pair& t) const {
-        if (first != t.first) return first > t.first;
-        return second > t.second;
+    Pair(int f = 0, double s = 0) {
+        first = f;
+        second = s;
     }
 
-    bool operator<(const Pair& t) const { return t > *this; }
-    bool operator>=(const Pair& t) const { return !(*this < t); }
-    bool operator<=(const Pair& t) const { return !(*this > t); }
-
-    bool operator==(const Pair& t) const {
-        return first == t.first && second == t.second;
+    // сравнение для max
+    bool operator>(const Pair& p) const {
+        return first > p.first;
     }
 
-    Pair operator+(const Pair& t) const {
-        return Pair(first + t.first, second + t.second);
+    // проверка диапазона
+    bool inRange(int a, int b) const {
+        return first >= a && first <= b;
     }
 
-    Pair operator-(const Pair& t) const {
-        return Pair(first - t.first, second - t.second);
+    // сложение
+    Pair operator+(const Pair& p) const {
+        return Pair(first + p.first, second + p.second);
     }
 
+    // деление
     Pair operator/(int n) const {
         return Pair(first / n, second / n);
     }
 
-    friend std::istream& operator>>(std::istream& in, Pair& t) {
-        return in >> t.first >> t.second;
-    }
-
-    friend std::ostream& operator<<(std::ostream& out, const Pair& t) {
-        return out << "(" << t.first << ":" << t.second << ")";
+    friend ostream& operator<<(ostream& out, const Pair& p) {
+        out << "(" << p.first << "," << p.second << ")";
+        return out;
     }
 };
