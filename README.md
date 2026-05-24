@@ -44,5 +44,5 @@
 | 31 | Лабораторная работа №13 | Lab13 | PASSED |
 | 32 | Лабораторная работа №1 bintree | Lab1_bintree | PASSED |
 | 33 | Лабораторная работа №2 graph | Lab2_graph | PASSED |
-| 34 | Лабораторная работа №13 | Lab3_komi | PASSED |
+| 34 | Лабораторная работа №3 komi | Lab3_komi | PASSED |
 
